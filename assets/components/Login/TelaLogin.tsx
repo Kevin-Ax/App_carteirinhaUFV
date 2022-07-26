@@ -1,5 +1,12 @@
-import { Pressable, TextInput, View, StyleSheet, Text, Image, Button } from 'react-native';
-import React from 'react';
+import { Pressable, TextInput, View, StyleSheet, Text, Image } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
+import StackRoutes from './StackRoutes';
+
+const Navigation = useNavigation();
+
+function navigateTo(){
+    Navigation.navigate('Cadastro');
+}
 
 function TelaLogin(){
     return(
@@ -44,7 +51,7 @@ function TelaLogin(){
             <Text style={style.Text2}
                 >Não tem conta ainda? 
                     <Pressable
-                    //onPress={ (navigation) => navigation.navigate('./assets/components/Login/TelaLogin')}
+                        onPress={navigateTo}
                         style={style.button2}
                         >
                         <Text
