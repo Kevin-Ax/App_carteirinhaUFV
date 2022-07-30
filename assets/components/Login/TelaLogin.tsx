@@ -1,7 +1,8 @@
-import { Pressable, TextInput, View, StyleSheet, Text, Image, Button } from 'react-native';
-import React from 'react';
+import React from 'react'
+import { Pressable, TextInput, View, StyleSheet, Text, Image } from 'react-native';
 
-function TelaLogin(){
+//Implementação da tela de login
+const TelaLogin = ( {navigation} ) => {
     return(
         <View style={style.container}>
             <Image
@@ -44,12 +45,12 @@ function TelaLogin(){
             <Text style={style.Text2}
                 >Não tem conta ainda? 
                     <Pressable
-                    //onPress={ (navigation) => navigation.navigate('./assets/components/Login/TelaLogin')}
+                        onPress={navigation.navigate("Cadastro")}
                         style={style.button2}
                         >
                         <Text
                             style={style.TextButton2}
-                            >Fazer /Cadastro
+                            >Fazer Cadastro
                         </Text>
                     </Pressable>
             </Text>
