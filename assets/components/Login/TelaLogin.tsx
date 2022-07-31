@@ -1,13 +1,21 @@
-import { Pressable, TextInput, View, StyleSheet, Text, Image, Button, KeyboardAvoidingView, Platform } from 'react-native';
+import { TextInput, View, StyleSheet, Text, Image, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import firebase from '../../config/firebase';
+import auth from '@react-native-firebase/auth';
+import { Feather } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function TelaLogin() {
-    const [email, setEmail] = useState("")
+
+function TelaLogin({ navigation }: { navigation: any }) {
+    const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
-    const [errorLogin, setErrorLogin] = useState("")
+    const [errorLogin, setErrorLogin] = useState(false)
 
-    const loginFirebase = () => { }
+
+    const loginFirebase = () => {
+
+    }
 
     useEffect(() => {
 
@@ -36,6 +44,8 @@ function TelaLogin() {
             <TextInput
                 style={style.inputText}
                 placeholder='Matricula'
+                onChangeText={(text) => setUser(text)}
+                value={user}
             />
             <Text
                 style={style.TextSenha}
@@ -45,26 +55,46 @@ function TelaLogin() {
                 style={style.inputText}
                 secureTextEntry={true}
                 placeholder='Senha'
+                onChangeText={(text) => setPassword(text)}
+                value={password}
             />
-            <Pressable style={style.button}>
-                <Text
-                    style={style.TextButton}
-                >Login
-                </Text>
-            </Pressable>
+
+            {
+                errorLogin === true ?
+                    <View style={style.warningAlert}>
+                        <Feather name="alert-circle" size={24} color="black" style={style.wargningIcon} />
+                        <Text style={style.warningText}>Email ou senha inválidos</Text>
+                    </View>
+                    :
+                    <View></View>
+            }
+
+
+            {user == "" || password == ""
+                ?
+                <TouchableOpacity
+                    disabled={true}
+                    style={style.button}>
+                    <Text style={style.TextButton}>Login</Text>
+                </TouchableOpacity>
+                :
+                <TouchableOpacity
+                    style={style.button}
+                    onPress={loginFirebase}>
+                    <Text style={style.TextButton}>Login</Text>
+                </TouchableOpacity>
+            }
+
+
             <Text style={style.Text2}
             >Não tem conta ainda?
-                <Pressable
-                    //onPress={ (navigation) => navigation.navigate('./assets/components/Login/TelaLogin')}
-                    style={style.button2}
-                >
-                    <Text
-                        style={style.TextButton2}
-                    >Fazer /Cadastro
-                    </Text>
-                </Pressable>
+                <Text
+                    style={style.TextButton2} onPress={() => navigation.navigate('Cadastro')}>
+                    Fazer /Cadastro
+                </Text>
             </Text>
-        </KeyboardAvoidingView>
+
+        </KeyboardAvoidingView >
     );
 }
 
@@ -151,6 +181,26 @@ const style = StyleSheet.create({
         width: '60%',
         height: '4.88%',
         marginTop: 8
+    },
+    warningAlert: {
+        color: '#9F6000',
+        backgroundColor: '#FEEFB3',
+        flexDirection: 'row',
+        width: '80%',
+        height: '5%',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: '#9F6000',
+        borderRadius: 50,
+    },
+    wargningIcon: {
+        marginTop: 7,
+        marginLeft: 10,
+        width: 30,
+    },
+    warningText: {
+        marginTop: 7,
     }
 })
 
