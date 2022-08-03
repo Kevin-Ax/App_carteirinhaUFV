@@ -1,20 +1,19 @@
 import { TextInput, View, StyleSheet, Text, Image, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import firebase from '../../config/firebase';
 import auth from '@react-native-firebase/auth';
 import { Feather } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useAsyncStorage } from '@react-native-community/async-storage';
+// import { useAsyncStorage } from '@react-native-community/async-storage';
 
 function TelaLogin({ navigation }: { navigation: any }) {
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
     const [errorLogin, setErrorLogin] = useState(false)
 
-    const storageUser = (key, value) => {
-        useAsyncStorage.setItem(key, value)
-    }
+    // const storageUser = (key, value) => {
+    //     useAsyncStorage.setItem(key, value)
+    // }
 
     const loginFirebase = () => {
         navigation.navigate('Main');
@@ -83,10 +82,7 @@ function TelaLogin({ navigation }: { navigation: any }) {
                 :
                 <TouchableOpacity
                     style={style.button}
-                    onPress={e  => {
-                        storageUser('key', user)
-                        loginFirebase()
-                    }}>
+                    onPress={loginFirebase}>
                     <Text style={style.TextButton}>Login</Text>
                 </TouchableOpacity>
             }
