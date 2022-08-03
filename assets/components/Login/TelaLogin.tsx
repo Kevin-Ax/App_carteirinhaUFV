@@ -1,13 +1,28 @@
 import { TextInput, View, StyleSheet, Text, Image, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import firebase from '../../config/firebase';
-import auth from '@react-native-firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Feather } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
 
 
 function TelaLogin({ navigation }: { navigation: any }) {
+    const firebaseConfig = {
+        apiKey: "AIzaSyCtX4u1irhuLyTnMLtTkjRFf3SMiXrDSJE",
+        authDomain: "carteirinhadigitalufv.firebaseapp.com",
+        projectId: "carteirinhadigitalufv",
+        storageBucket: "carteirinhadigitalufv.appspot.com",
+        messagingSenderId: "1028685218957",
+        appId: "1:1028685218957:web:54a794a1920785ceca0ec4"
+    };
+
+    // Initialize Firebase
+    const firebase = initializeApp(firebaseConfig);
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
     const [errorLogin, setErrorLogin] = useState(false)
@@ -15,6 +30,18 @@ function TelaLogin({ navigation }: { navigation: any }) {
 
     const loginFirebase = () => {
 
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, user, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log("LOGADO")
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
     }
 
     useEffect(() => {
