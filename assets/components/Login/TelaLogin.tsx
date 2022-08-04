@@ -1,28 +1,30 @@
 import { TextInput, View, StyleSheet, Text, Image, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import firebase from '../../config/firebase';
 import auth from '@react-native-firebase/auth';
 import { Feather } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+// import { useAsyncStorage } from '@react-native-community/async-storage';
 
 function TelaLogin({ navigation }: { navigation: any }) {
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
     const [errorLogin, setErrorLogin] = useState(false)
 
+    // const storageUser = (key, value) => {
+    //     useAsyncStorage.setItem(key, value)
+    // }
 
     const loginFirebase = () => {
-        
+        navigation.navigate('Main');
     }
 
-    useEffect(() => {
-
-    }, [])
+    const errLogin = () => {
+        setErrorLogin(true)
+    }
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={style.container}>
+        <View style={style.container}>
             <Image
                 source={{ uri: 'https://5287aa00874a313e299d-1850966fc307ff23e1e789aeafd2476b.ssl.cf5.rackcdn.com/PostImagem/42240/foto-branca-download-wallpapers-e-onde-usar_o1fcm9aiph1mte1km1f11cs53mng.png' }}
                 style={style.background}
@@ -70,10 +72,10 @@ function TelaLogin({ navigation }: { navigation: any }) {
             }
 
 
-            {user == "" || password == ""
+            {user === "" || password === ""
                 ?
                 <TouchableOpacity
-                    disabled={true}
+                    onPress={errLogin}
                     style={style.button}>
                     <Text style={style.TextButton}>Login</Text>
                 </TouchableOpacity>
@@ -94,7 +96,7 @@ function TelaLogin({ navigation }: { navigation: any }) {
                 </Text>
             </Text>
 
-        </KeyboardAvoidingView >
+        </View >
     );
 }
 
