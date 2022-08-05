@@ -1,11 +1,10 @@
 import { TouchableOpacity, View,  StyleSheet, Text, Image, KeyboardAvoidingView, Platform, Linking } from 'react-native';
 import Barcode from "@kichiyaki/react-native-barcode-generator";
 import { useState } from 'react';
-import { useAsyncStorage } from '@react-native-community/async-storage';
 
 function TelaMain() {
 
-    const [matCode, setMatCode] = useState("")
+    const [matCode, setMatCode] = useState("")  //Variável para pegar a matricula 
 
     function goToSapiens(){
         Linking.openURL("https://sso.acesso.ufv.br/auth/login?service=https%3A%2F%2Fsso.acesso.ufv.br%2Fauth%2Foauth2.0%2FcallbackAuthorize%3Fclient_id%3Dguardiao_cas_usuario%26redirect_uri%3Dhttps%253A%252F%252Fsso.guardiao.ufv.br%252Fauth%252Flogin%253Fclient_name%253Dpessoa%26response_type%3Dcode%26client_name%3DCasOAuthClient")
@@ -13,11 +12,6 @@ function TelaMain() {
 
     function goToMoodle(){
         Linking.openURL("https://ava.ufv.br/login/index.php")
-    }
-
-    const findValue = async (key) =>{
-       const code = await useAsyncStorage.getItem(key);
-       setMatCode(code);
     }
 
     return (
@@ -42,13 +36,13 @@ function TelaMain() {
             </Text>
             <Barcode 
                 style={style.BarCode} 
-                value={findValue('key')} 
+                value={"102027"} //Pegar matricula do Usuário
                 format="CODE39"
             />
-            <KeyboardAvoidingView style={style.buttonsView}>
+            <Text style={style.buttonsView}>
                 <TouchableOpacity 
                     style={style.buttonSapies}
-                    onPress={goToSapiens}
+                    onPress={goToSapiens} 
                     ><Text
                         style={style.Text}
                         >Sapiens
@@ -62,9 +56,10 @@ function TelaMain() {
                         >Moodle
                     </Text>
                 </TouchableOpacity>
-            </KeyboardAvoidingView>
-            <Text>
-                
+            </Text>
+            <Text
+                style={style.TextFooter}
+                >Todos os direitos reservados aos aluos de ciência da computação @Kevin_Alexandre, @PauloDezengrine, e @João
             </Text>
         </KeyboardAvoidingView>
     )
@@ -80,7 +75,6 @@ const style = StyleSheet.create({
         alignSelf: 'center',
         width: '65%',
         height: '15%',
-        marginTop: -230,
         marginBottom: 130,
     },
     background: {
@@ -93,9 +87,17 @@ const style = StyleSheet.create({
     Text:{
         alignSelf: 'center',
         color: 'white',
-        fontSize: 20,
+        fontSize: 26,
         marginTop: 15,
         paddingTop: 50,
+
+    },
+    TextFooter:{
+        fontSize:8,
+        fontStyle:'italic',
+        color:'black',
+        alignSelf:'center',
+        paddingTop:80
     },
     Title: {
         alignSelf: 'center',

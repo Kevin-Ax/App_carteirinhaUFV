@@ -29,7 +29,7 @@ function TelaCadastro(){
                 style={style.TextSenha}
                     >Senha
             </Text>
-            <TextInput
+            <TextInput  //colocar 'keuboardavoidignview pra melhorar UX
                 style = {style.inputText}
                 secureTextEntry={true}
                 placeholder='Senha'
@@ -38,7 +38,7 @@ function TelaCadastro(){
                 style={style.TextSenha}
                     >Confirme sua senha
             </Text>
-            <TextInput
+            <TextInput  //colocar 'keuboardavoidignview pra melhorar UX
                 style = {style.inputText}
                 secureTextEntry={true}
                 placeholder='CSenha'

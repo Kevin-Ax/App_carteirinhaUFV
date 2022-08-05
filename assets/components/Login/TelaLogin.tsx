@@ -5,19 +5,14 @@ import auth from '@react-native-firebase/auth';
 import { Feather } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useAsyncStorage } from '@react-native-community/async-storage';
 
 function TelaLogin({ navigation }: { navigation: any }) {
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
     const [errorLogin, setErrorLogin] = useState(false)
 
-    const storageUser = (key, value) => {
-        useAsyncStorage.setItem(key, value)
-    }
-
     const loginFirebase = () => {
-        navigation.navigate('Main');
+        navigation.navigate('Main');    //impleentar função do BD
     }
 
     useEffect(() => {
@@ -44,7 +39,7 @@ function TelaLogin({ navigation }: { navigation: any }) {
                 style={style.TextMatricula}
             >Matricula
             </Text>
-            <TextInput
+            <TextInput  //colocar 'keuboardavoidignview pra melhorar UX
                 style={style.inputText}
                 placeholder='Matricula'
                 onChangeText={(text) => setUser(text)}
@@ -54,7 +49,7 @@ function TelaLogin({ navigation }: { navigation: any }) {
                 style={style.TextSenha}
             >Senha
             </Text>
-            <TextInput
+            <TextInput  //colocar 'keuboardavoidignview pra melhorar UX
                 style={style.inputText}
                 secureTextEntry={true}
                 placeholder='Senha'
@@ -84,7 +79,6 @@ function TelaLogin({ navigation }: { navigation: any }) {
                 <TouchableOpacity
                     style={style.button}
                     onPress={e  => {
-                        storageUser('key', user)
                         loginFirebase()
                     }}>
                     <Text style={style.TextButton}>Login</Text>
