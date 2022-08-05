@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TelaLogin from "./assets/components/Login/TelaLogin";
 import TelaCadastro from "./assets/components/cadastro/TelaCadastro";
 import TelaMain from './assets/components/Main/TelaMain';
-import { useAsyncStorage } from '@react-native-community/async-storage';
+// import { useAsyncStorage } from '@react-native-community/async-storage';
 
 const Stack = createNativeStackNavigator()
 
